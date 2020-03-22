@@ -54,6 +54,7 @@ router.post(
     check('password', 'Enter password').exists(),
   ],
   async (req, res) => {
+    console.log(777);
     try {
       const errors = validationResult(req);
 
