@@ -49726,7 +49726,7 @@ LoginPage.getInitialProps = function () {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Flogin&absolutePagePath=%2FUsers%2Fkir%2Fprojects%2Fmern-demo%2Fnext-client%2Fpages%2Flogin.js ***!
   \********************************************************************************************************************************************/
@@ -49749,5 +49749,5 @@ module.exports = dll_82519ec661270f7f484f;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=login.js.map
