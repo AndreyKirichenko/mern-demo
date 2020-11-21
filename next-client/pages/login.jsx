@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react';
-import { Box, Button, Container, Grid, Paper, TextField, Typography, makeStyles } from '@material-ui/core';
+import { Box, Button, TextField } from '@material-ui/core';
 import { useSnackbar } from 'material-ui-snackbar-provider';
 import Router from 'next/router';
 
@@ -8,17 +8,7 @@ import { useHttp } from '../hooks/http.hook';
 import { Redirection } from '../components/Redirection/Redirection';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    paddingTop: theme.spacing(8),
-    paddingRight: theme.spacing(4),
-    paddingBottom: theme.spacing(8),
-    paddingLeft: theme.spacing(4),
-  },
-}));
-
 const LoginPage = () => {
-  const classes = useStyles();
   const snackbar = useSnackbar();
 
   const [form, setForm] = useState({
@@ -100,7 +90,5 @@ const LoginPage = () => {
     </CentralBillet>
   );
 };
-
-LoginPage.getInitialProps = () => ({});
 
 export default LoginPage;
