@@ -1,29 +1,34 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
-const AUTHENTICATED_LIST = [
+interface ListItem {
+  href: string;
+  title: string;
+}
+
+const AUTHENTICATED_LIST: ListItem[] = [
   {
-    title: 'Create',
     href: '/create',
+    title: 'Create',
   },
   {
-    title: 'Log out',
     href: '/logout',
+    title: 'Log out',
   },
 ];
 
-const NOT_AUTHENTICATED_LIST = [
+const NOT_AUTHENTICATED_LIST: ListItem[] = [
   {
-    title: 'Login',
     href: '/login',
+    title: 'Login',
   },
   {
-    title: 'Register',
     href: '/register',
+    title: 'Register',
   },
 ];
 
-export const useHeaderMenuList = () => {
+export const useHeaderMenuList = (): ListItem[] => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return isAuthenticated ? AUTHENTICATED_LIST : NOT_AUTHENTICATED_LIST;
