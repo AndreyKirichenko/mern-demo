@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head';
 
 
-import { AuthContext } from '../context/AuthContext';
-import { Header } from './Header';
-import { useAuth } from '../hooks/auth.hook';
+import { AuthContext } from '../../context/AuthContext';
+import { Header } from '../Header/Header';
+import { useAuth } from '../../hooks/auth.hook';
 
 
 const useStyles = makeStyles((theme) => ({

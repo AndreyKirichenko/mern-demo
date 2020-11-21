@@ -5,7 +5,7 @@ import { SnackbarProvider } from 'material-ui-snackbar-provider'
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/Layout';
 import theme from '../theme';
 
 export default class MyApp extends App {
