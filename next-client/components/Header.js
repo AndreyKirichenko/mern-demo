@@ -6,7 +6,7 @@ import { default as  NextLink } from 'next/Link'
 import { MobileMenu } from './MobileMenu';
 import { DesktopMenu } from './DesktopMenu';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -29,7 +29,7 @@ const list = [
 
 export const Header = () => {
   const classes = useStyles();
-  const isUpToSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
+  const isUpToSm = useMediaQuery((theme) => theme.breakpoints.up('sm'));
 
   return (
     <AppBar>

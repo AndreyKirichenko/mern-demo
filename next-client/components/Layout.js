@@ -1,12 +1,15 @@
 import React from 'react';
-import { Container, CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { Container, CircularProgress } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head';
 
-import { Header } from './Header';
-import theme from '../theme';
 
-const useStyles = makeStyles(theme => ({
+import { AuthContext } from '../context/AuthContext';
+import { Header } from './Header';
+import { useAuth } from '../hooks/auth.hook';
+
+
+const useStyles = makeStyles((theme) => ({
   main: {
     minHeight: '100vh',
     paddingBottom: theme.spacing(8),
@@ -17,20 +20,33 @@ const useStyles = makeStyles(theme => ({
 const Layout = ({ children }) => {
   const classes = useStyles();
 
+  const { login, logout, token, userId, ready } = useAuth();
+  const isAuthenticated = !!token;
+
+  if(!ready) {
+    return <CircularProgress />
+  }
+
   return (
-      <>
-        <Head>
-          <title>My page title</title>
-        </Head>
+    <AuthContext.Provider value={{
+      login,
+      logout,
+      token,
+      userId,
+      isAuthenticated,
+    }}>
+      <Head>
+        <title>My page title</title>
+      </Head>
 
-        <Header />
+      <Header />
 
-        <main className={classes.main}>
-          <Container>
-            {children}
-          </Container>
-        </main>
-      </>
+      <main className={classes.main}>
+        <Container>
+          {children}
+        </Container>
+      </main>
+    </AuthContext.Provider>
 
   );
 };

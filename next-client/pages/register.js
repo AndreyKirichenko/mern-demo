@@ -1,5 +1,10 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Box, Button, Container, Grid, Paper, TextField, Typography, makeStyles } from '@material-ui/core';
+import Router from 'next/router';
+import { useSnackbar } from 'material-ui-snackbar-provider';
+
+import { AuthContext } from '../context/AuthContext';
+import { useHttp } from '../hooks/http.hook';
 
 const useStyles = makeStyles( theme => ({
   paper: {
@@ -12,6 +17,62 @@ const useStyles = makeStyles( theme => ({
 
 const RegisterPage = () => {
   const classes = useStyles();
+  const snackbar = useSnackbar();
+
+  const [ form, setForm ] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { error, loading, request, clearError } = useHttp();
+
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const registerHandler = async () => {
+    console.log('loginHandler');
+    try {
+      const  data = await request('/api/auth/register', 'POST', { ...form })
+      message(data.message);
+
+      const timeout = setTimeout(() => {
+        Router.push('/');
+      }, 5000);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    if(error) {
+      snackbar.showMessage(error);
+    }
+    clearError();
+  }, [error, clearError]);
+
+  const changeHandler = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value })
+  };
+
+  if (isAuthenticated) {
+    setTimeout(() => Router.push('/'), 5000);
+
+    return (
+      <Container>
+        <Grid container justify="center">
+          <Grid item xs={12} sm={8} md={6} lg={6}>
+            <Paper className={classes.paper} align="center">
+              <Typography
+                component="h1"
+                variant="h5"
+                align="center"
+              >
+                You are already authenticated
+              </Typography>
+              will be redirected after 5 seconds...
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -24,28 +85,36 @@ const RegisterPage = () => {
 
             <Box mb={4}>
               <TextField
-                required
+                fullWidth
                 id="email"
                 label="E-mail"
-                fullWidth
                 margin="normal"
+                name="email"
+                onChange={changeHandler}
+                required
+                value={form.email}
               />
 
               <TextField
-                required
-                id="standard-password-input"
-                label="Password"
-                type="password"
                 autoComplete="current-password"
                 fullWidth
+                id="standard-password-input"
+                label="Password"
                 margin="normal"
+                name="password"
+                onChange={changeHandler}
+                required
+                type="password"
+                value={form.password}
               />
             </Box>
 
             <Box display="flex" justifyContent="flex-end">
               <Button
-                variant="contained"
                 color="primary"
+                disabled={loading}
+                onClick={registerHandler}
+                variant="contained"
               >
                 Sign up
               </Button> 
@@ -55,10 +124,6 @@ const RegisterPage = () => {
       </Grid>
     </Container>
   );
-};
-
-RegisterPage.getInitialProps = () => {
-  return {};
 };
 
 export default RegisterPage;
