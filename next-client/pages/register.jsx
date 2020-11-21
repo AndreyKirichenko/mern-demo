@@ -5,6 +5,7 @@ import { useSnackbar } from 'material-ui-snackbar-provider';
 
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
+import { Redirection } from '../components/Redirection/Redirection';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -29,7 +30,6 @@ const RegisterPage = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
   const registerHandler = async () => {
-    console.log('loginHandler');
     try {
       const data = await request('/api/auth/register', 'POST', { ...form });
 
@@ -56,30 +56,13 @@ const RegisterPage = () => {
   if (isAuthenticated) {
     setTimeout(() => Router.push('/'), 5000);
 
-    return (
-      <Container>
-        <Grid container justify="center">
-          <Grid item xs={12} sm={8} md={6} lg={6}>
-            <Paper className={classes.paper} align="center">
-              <Typography
-                component="h1"
-                variant="h5"
-                align="center"
-              >
-                You are already authenticated
-              </Typography>
-              will be redirected after 5 seconds...
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    );
+    return <Redirection title="You are already authenticated" />;
   }
 
   return (
     <Container>
       <Grid container justify="center">
-        <Grid item xs={12} sm={8} md={6} lg={4}>
+        <Grid item xs={12} sm={8} md={6} lg={6}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4">
               Registration

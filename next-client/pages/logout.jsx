@@ -1,8 +1,9 @@
 import { useEffect, useContext } from 'react';
-import { Container, Grid, Paper, Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Router from 'next/router';
 
 import { AuthContext } from '../context/AuthContext';
+import { Redirection } from '../components/Redirection/Redirection';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,24 +30,7 @@ const LogoutPage = () => {
     };
   }, []);
 
-  return (
-    <Container>
-      <Grid container justify="center">
-        <Grid item xs={12} sm={8} md={6} lg={6}>
-          <Paper className={classes.paper} align="center">
-            <Typography
-              component="h1"
-              variant="h5"
-              align="center"
-            >
-              Logging out!
-            </Typography>
-            will be redirected after 5 seconds...
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
-  );
+  return <Redirection title="Logging out!" />;
 };
 
 export default LogoutPage;

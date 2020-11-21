@@ -5,6 +5,7 @@ import Router from 'next/router';
 
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
+import { Redirection } from '../components/Redirection/Redirection';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -29,12 +30,12 @@ const LoginPage = () => {
   const { login, isAuthenticated } = useContext(AuthContext);
 
   const loginHandler = async () => {
-    console.log('loginHandler');
     try {
       const data = await request('/api/auth/login', 'POST', { ...form });
 
       login(data.token, data.userId);
       Router.push('/create');
+    // eslint-disable-next-line no-empty
     } catch {}
   };
 
@@ -52,24 +53,7 @@ const LoginPage = () => {
   if (isAuthenticated) {
     setTimeout(() => Router.push('/'), 5000);
 
-    return (
-      <Container>
-        <Grid container justify="center">
-          <Grid item xs={12} sm={8} md={6} lg={6}>
-            <Paper className={classes.paper} align="center">
-              <Typography
-                component="h1"
-                variant="h5"
-                align="center"
-              >
-                You are already authenticated
-              </Typography>
-              will be redirected after 5 seconds...
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    );
+    return <Redirection title="You are already authenticated" />;
   }
 
   return (
