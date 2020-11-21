@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Typography, Toolbar, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { default as  NextLink } from 'next/Link'
+import { default as NextLink } from 'next/Link';
 
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { DesktopMenu } from '../DesktopMenu/DesktopMenu';
