@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 const STORAGE_NAME = 'userData';
 
 export interface UseAuth {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   login: (jwtToken: string, id: string) => void;
   logout: () => void;
   ready: boolean;

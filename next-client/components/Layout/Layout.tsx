@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Container, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head';
@@ -16,27 +16,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface LayoutProps {
-  children: React.ReactNode | null;
+  children?: ReactNode | null;
 }
 
-const Layout = ({ children = null }: LayoutProps): JSX.Element => {
+const Layout = ({ children }: LayoutProps): JSX.Element => {
   const classes = useStyles();
 
-  const { login, logout, token, userId, ready } = useAuth();
+  const auth = useAuth();
+  const { ready } = auth;
 
   if (!ready) {
     return <CircularProgress />;
   }
 
   return (
-    <AuthContext.Provider value={{
-      login,
-      logout,
-      token,
-      userId,
-      isAuthenticated,
-    }}
-    >
+    <AuthContext.Provider value={auth}>
       <Head>
         <title>My page title</title>
       </Head>
@@ -45,6 +39,9 @@ const Layout = ({ children = null }: LayoutProps): JSX.Element => {
 
       <main className={classes.main}>
         <Container>
+          {/* Something wrong for children in Container */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-ignore */}
           {children}
         </Container>
       </main>
