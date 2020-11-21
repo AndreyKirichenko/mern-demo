@@ -27,4 +27,4 @@ export const useHeaderMenuList = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return isAuthenticated ? AUTHENTICATED_LIST : NOT_AUTHENTICATED_LIST;
-}
+};
