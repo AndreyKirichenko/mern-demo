@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, ChangeEvent } from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 import Router from 'next/router';
 import { useSnackbar } from 'material-ui-snackbar-provider';
@@ -8,7 +8,7 @@ import { useHttp } from '../hooks/http.hook';
 import { Redirection } from '../components/Redirection/Redirection';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
 
-const RegisterPage = () => {
+const RegisterPage = (): JSX.Element => {
   const snackbar = useSnackbar();
 
   const [form, setForm] = useState({
@@ -20,8 +20,12 @@ const RegisterPage = () => {
 
   const { isAuthenticated } = useContext(AuthContext);
 
-  const registerHandler = async () => {
+  // TODO: specify Promise
+  const registerHandler = async (): Promise<unknown> => {
     try {
+      // TODO: specify request
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const data = await request('/api/auth/register', 'POST', { ...form });
 
       snackbar.showMessage(data.message);
@@ -29,6 +33,8 @@ const RegisterPage = () => {
       setTimeout(() => {
         Router.push('/');
       }, 5000);
+
+      return data;
     // eslint-disable-next-line no-empty
     } catch {}
   };
@@ -40,7 +46,7 @@ const RegisterPage = () => {
     clearError();
   }, [error, clearError]);
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 

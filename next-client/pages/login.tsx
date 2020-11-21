@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, ChangeEvent } from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 import { useSnackbar } from 'material-ui-snackbar-provider';
 import Router from 'next/router';
@@ -8,7 +8,7 @@ import { useHttp } from '../hooks/http.hook';
 import { Redirection } from '../components/Redirection/Redirection';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const snackbar = useSnackbar();
 
   const [form, setForm] = useState({
@@ -20,12 +20,22 @@ const LoginPage = () => {
 
   const { login, isAuthenticated } = useContext(AuthContext);
 
-  const loginHandler = async () => {
+  // TODO: specify Promise
+  const loginHandler = async (): Promise<unknown> => {
     try {
+      // TODO: specify request
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const data = await request('/api/auth/login', 'POST', { ...form });
 
+      // TODO: Cannot invoke an object which is possibly 'undefined'
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       login(data.token, data.userId);
+
       Router.push('/create');
+
+      return data;
     // eslint-disable-next-line no-empty
     } catch {}
   };
@@ -37,7 +47,7 @@ const LoginPage = () => {
     clearError();
   }, [error, clearError]);
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
