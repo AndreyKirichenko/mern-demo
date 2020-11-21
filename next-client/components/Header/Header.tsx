@@ -1,11 +1,9 @@
 import React from 'react';
-import { AppBar, Typography, Toolbar, useMediaQuery } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { default as NextLink } from 'next/Link';
 
-import { MobileMenu } from '../MobileMenu/MobileMenu';
-import { DesktopMenu } from '../DesktopMenu/DesktopMenu';
-import { useHeaderMenuList } from './useHeaderMenuList';
+import { DesktopMenu, MobileMenu } from '../MainMenu/MainMenu';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,8 +17,7 @@ const useStyles = makeStyles(() => ({
 
 export const Header = (): JSX.Element => {
   const classes = useStyles();
-  const isUpToSm = useMediaQuery((theme) => theme.breakpoints.up('sm'));
-  const list = useHeaderMenuList();
+  const isUpToSm = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
 
   return (
     <AppBar>
@@ -31,9 +28,9 @@ export const Header = (): JSX.Element => {
           </Typography>
         </NextLink>
 
-        {isUpToSm && <DesktopMenu list={list} />}
+        {isUpToSm && <DesktopMenu />}
 
-        {!isUpToSm && <MobileMenu list={list} />}
+        {!isUpToSm && <MobileMenu />}
       </Toolbar>
     </AppBar>
   );

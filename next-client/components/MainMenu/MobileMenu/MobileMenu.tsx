@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, Drawer, List, ListItem, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-
 import { default as NextLink } from 'next/Link';
+
+import { useMainMenuList } from '../useMainMenuList';
 
 const useStyles = makeStyles({
   list: {
@@ -15,43 +16,26 @@ const useStyles = makeStyles({
   },
 });
 
-export const MobileMenu = ({ list }) => {
+export const MobileMenu = (): JSX.Element => {
   const classes = useStyles();
+  const list = useMainMenuList();
 
   const [isOpenDrawer, setDrawer] = useState(false);
 
-  const toggleDrawer = event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const toggleDrawer = (event): void => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
 
     setDrawer(!isOpenDrawer);
   };
 
-  const renderDrawerList = () => (
-    <div
-      role="presentation"
-      onClick={toggleDrawer}
-      onKeyDown={toggleDrawer}
-    >
-      <List autoFocus className={classes.list}>
-        {list.map(item => (
-          <ListItem key={item.title} className={classes.listItem}>
-            <NextLink href={item.href}>
-              <Button component="a" color="inherit">{item.title}</Button>
-            </NextLink>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
     <>
       <IconButton
-        edge="start"
-        color="inherit"
         aria-label="menu"
+        color="inherit"
+        edge="start"
         onClick={toggleDrawer}
       >
         <MenuIcon />
@@ -71,7 +55,23 @@ export const MobileMenu = ({ list }) => {
           </IconButton>
         </Box>
 
-        {renderDrawerList('left')}
+        <div
+          role="presentation"
+          onClick={toggleDrawer}
+          onKeyDown={toggleDrawer}
+        >
+          <List
+            className={classes.list}
+          >
+            {list.map(item => (
+              <ListItem key={item.title} className={classes.listItem}>
+                <NextLink href={item.href}>
+                  <Button component="a" color="inherit">{item.title}</Button>
+                </NextLink>
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </Drawer>
     </>
   );

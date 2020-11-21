@@ -48,6 +48,7 @@
     "function-paren-newline": ["warn", "consistent"],
     "implicit-arrow-linebreak": "off",
     "import/extensions": "off",
+    "import/no-named-default": "off",
     "import/no-namespace": "error",
     "import/no-unresolved": ["error", { "ignore": ["\\.(jpg|png|svg)$"] }],
     "import/no-cycle": ["error", { "maxDepth": 1 }],

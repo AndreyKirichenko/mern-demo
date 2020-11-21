@@ -28,7 +28,7 @@ const NOT_AUTHENTICATED_LIST: ListItem[] = [
   },
 ];
 
-export const useHeaderMenuList = (): ListItem[] => {
+export const useMainMenuList = (): ListItem[] => {
   const { isAuthenticated } = useContext(AuthContext);
 
   return isAuthenticated ? AUTHENTICATED_LIST : NOT_AUTHENTICATED_LIST;
