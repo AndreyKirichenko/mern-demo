@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 interface UseHttp {
   clearError: () => void ;
-  error: string;
+  error: string | null;
   loading: boolean;
   // TODO: specify request
   request: unknown;

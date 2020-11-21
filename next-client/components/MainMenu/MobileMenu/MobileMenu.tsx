@@ -3,7 +3,7 @@ import { Box, Button, Drawer, List, ListItem, IconButton } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import { default as NextLink } from 'next/Link';
+import NextLink from 'next/Link';
 
 import { useMainMenuList } from '../useMainMenuList';
 

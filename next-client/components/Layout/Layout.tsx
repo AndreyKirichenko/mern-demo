@@ -1,3 +1,4 @@
+import React, { ReactNode } from 'react';
 import { Container, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head';
@@ -14,11 +15,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode | null;
+}
+
+const Layout = ({ children = null }: LayoutProps): JSX.Element => {
   const classes = useStyles();
 
   const { login, logout, token, userId, ready } = useAuth();
-  const isAuthenticated = !!token;
+  
 
   if (!ready) {
     return <CircularProgress />;

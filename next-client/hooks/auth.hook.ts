@@ -2,11 +2,11 @@ import { useState, useCallback, useEffect } from 'react';
 
 const STORAGE_NAME = 'userData';
 
-interface UseAuth {
+export interface UseAuth {
+  isAuthenticated: boolean;
   login: (jwtToken: string, id: string) => void;
   logout: () => void;
   ready: boolean;
-  // TODO: To specify token and userId better
   token: string | null;
   userId: string | null;
 }
@@ -42,7 +42,10 @@ export const useAuth = (): UseAuth => {
     setReady(true);
   }, [login]);
 
+  const isAuthenticated = !!token;
+
   return {
+    isAuthenticated,
     login,
     logout,
     ready,

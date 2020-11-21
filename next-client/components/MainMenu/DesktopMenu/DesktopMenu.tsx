@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 
-import { default as NextLink } from 'next/Link';
+import NextLink from 'next/Link';
 import { useMainMenuList } from '../useMainMenuList';
 
 export const DesktopMenu = (): JSX.Element => {
