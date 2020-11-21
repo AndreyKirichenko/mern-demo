@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
-function noop() {}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+function noop(): void {}
 
 export const AuthContext = createContext({
   token: null,
