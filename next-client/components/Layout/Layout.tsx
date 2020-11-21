@@ -23,7 +23,6 @@ const Layout = ({ children = null }: LayoutProps): JSX.Element => {
   const classes = useStyles();
 
   const { login, logout, token, userId, ready } = useAuth();
-  
 
   if (!ready) {
     return <CircularProgress />;
