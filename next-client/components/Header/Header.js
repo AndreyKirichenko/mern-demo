@@ -5,6 +5,7 @@ import { default as  NextLink } from 'next/Link'
 
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { DesktopMenu } from '../DesktopMenu/DesktopMenu';
+import { useHeaderMenuList } from './useHeaderMenuList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,20 +17,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const list = [
-  {
-    title: 'Login',
-    href: '/login',
-  },
-  {
-    title: 'Register',
-    href: '/register',
-  },
-];
-
 export const Header = () => {
   const classes = useStyles();
   const isUpToSm = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+  const list = useHeaderMenuList();
 
   return (
     <AppBar>
