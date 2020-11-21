@@ -1,9 +1,7 @@
 import { Container } from '@material-ui/core';
 
-const LinkPage = () => (
+const LinkPage = (): JSX.Element => (
   <Container>There will be LinkPage!</Container>
 );
-
-LinkPage.getInitialProps = () => ({});
 
 export default LinkPage;

@@ -1,9 +1,7 @@
 import { Container } from '@material-ui/core';
 
-const CreatePage = () => (
+const CreatePage = (): JSX.Element => (
   <Container>There will be CreatePage!</Container>
 );
-
-CreatePage.getInitialProps = () => ({});
 
 export default CreatePage;

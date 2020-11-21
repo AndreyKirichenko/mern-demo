@@ -1,9 +1,7 @@
 import { Container } from '@material-ui/core';
 
-const IndexPage = () => (
+const IndexPage = (): JSX.Element => (
   <Container>There will be IndexPage!</Container>
 );
-
-IndexPage.getInitialProps = () => ({});
 
 export default IndexPage;

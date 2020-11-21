@@ -1,9 +1,7 @@
 import { Container } from '@material-ui/core';
 
-const DetailPage = () => (
+const DetailPage = (): JSX.Element => (
   <Container>There will be DetailPage!</Container>
 );
-
-DetailPage.getInitialProps = () => ({});
 
 export default DetailPage;
