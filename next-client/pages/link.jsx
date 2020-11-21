@@ -1,15 +1,9 @@
-import React from 'react';
 import { Container } from '@material-ui/core';
 
-const LinkPage = () => {
+const LinkPage = () => (
+  <Container>There will be LinkPage!</Container>
+);
 
-  return (
-    <Container>There will be LinkPage!</Container>
-  );
-};
-
-LinkPage.getInitialProps = () => {
-  return {};
-};
+LinkPage.getInitialProps = () => ({});
 
 export default LinkPage;

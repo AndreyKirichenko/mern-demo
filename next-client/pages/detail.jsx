@@ -1,15 +1,9 @@
-import React from 'react';
 import { Container } from '@material-ui/core';
 
-const DetailPage = () => {
+const DetailPage = () => (
+  <Container>There will be DetailPage!</Container>
+);
 
-  return (
-    <Container>There will be DetailPage!</Container>
-  );
-};
-
-DetailPage.getInitialProps = () => {
-  return {};
-};
+DetailPage.getInitialProps = () => ({});
 
 export default DetailPage;

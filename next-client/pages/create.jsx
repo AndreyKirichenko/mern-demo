@@ -1,15 +1,9 @@
-import React from 'react';
 import { Container } from '@material-ui/core';
 
-const CreatePage = () => {
+const CreatePage = () => (
+  <Container>There will be CreatePage!</Container>
+);
 
-  return (
-    <Container>There will be CreatePage!</Container>
-  );
-};
-
-CreatePage.getInitialProps = () => {
-  return {};
-};
+CreatePage.getInitialProps = () => ({});
 
 export default CreatePage;

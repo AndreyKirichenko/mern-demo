@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 import { AuthContext } from '../context/AuthContext';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     paddingTop: theme.spacing(8),
     paddingRight: theme.spacing(4),

@@ -6,20 +6,20 @@ import { useSnackbar } from 'material-ui-snackbar-provider';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     paddingTop: theme.spacing(8),
     paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(8),
     paddingLeft: theme.spacing(4),
-  }
+  },
 }));
 
 const RegisterPage = () => {
   const classes = useStyles();
   const snackbar = useSnackbar();
 
-  const [ form, setForm ] = useState({
+  const [form, setForm] = useState({
     email: '',
     password: '',
   });
@@ -31,24 +31,26 @@ const RegisterPage = () => {
   const registerHandler = async () => {
     console.log('loginHandler');
     try {
-      const  data = await request('/api/auth/register', 'POST', { ...form })
-      message(data.message);
+      const data = await request('/api/auth/register', 'POST', { ...form });
 
-      const timeout = setTimeout(() => {
+      snackbar.showMessage(data.message);
+
+      setTimeout(() => {
         Router.push('/');
       }, 5000);
-    } catch (e) {}
+    // eslint-disable-next-line no-empty
+    } catch {}
   };
 
   useEffect(() => {
-    if(error) {
+    if (error) {
       snackbar.showMessage(error);
     }
     clearError();
   }, [error, clearError]);
 
   const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value })
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   if (isAuthenticated) {
@@ -71,7 +73,7 @@ const RegisterPage = () => {
           </Grid>
         </Grid>
       </Container>
-    )
+    );
   }
 
   return (
@@ -117,7 +119,7 @@ const RegisterPage = () => {
                 variant="contained"
               >
                 Sign up
-              </Button> 
+              </Button>
             </Box>
           </Paper>
         </Grid>

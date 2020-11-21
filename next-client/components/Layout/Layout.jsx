@@ -2,11 +2,9 @@ import { Container, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head';
 
-
 import { AuthContext } from '../../context/AuthContext';
 import { Header } from '../Header/Header';
 import { useAuth } from '../../hooks/auth.hook';
-
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -22,8 +20,8 @@ const Layout = ({ children }) => {
   const { login, logout, token, userId, ready } = useAuth();
   const isAuthenticated = !!token;
 
-  if(!ready) {
-    return <CircularProgress />
+  if (!ready) {
+    return <CircularProgress />;
   }
 
   return (
@@ -33,7 +31,8 @@ const Layout = ({ children }) => {
       token,
       userId,
       isAuthenticated,
-    }}>
+    }}
+    >
       <Head>
         <title>My page title</title>
       </Head>

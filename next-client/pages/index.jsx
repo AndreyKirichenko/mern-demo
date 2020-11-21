@@ -1,15 +1,9 @@
-import React from 'react';
 import { Container } from '@material-ui/core';
 
-const IndexPage = () => {
+const IndexPage = () => (
+  <Container>There will be IndexPage!</Container>
+);
 
-  return (
-    <Container>There will be IndexPage!</Container>
-  );
-};
-
-IndexPage.getInitialProps = () => {
-  return {};
-};
+IndexPage.getInitialProps = () => ({});
 
 export default IndexPage;

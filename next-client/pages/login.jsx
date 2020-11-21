@@ -6,24 +6,24 @@ import Router from 'next/router';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     paddingTop: theme.spacing(8),
     paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(8),
     paddingLeft: theme.spacing(4),
-  }
+  },
 }));
 
 const LoginPage = () => {
   const classes = useStyles();
   const snackbar = useSnackbar();
 
-  const [ form, setForm ] = useState({
+  const [form, setForm] = useState({
     email: '',
     password: '',
   });
-  
+
   const { error, loading, request, clearError } = useHttp();
 
   const { login, isAuthenticated } = useContext(AuthContext);
@@ -32,20 +32,21 @@ const LoginPage = () => {
     console.log('loginHandler');
     try {
       const data = await request('/api/auth/login', 'POST', { ...form });
+
       login(data.token, data.userId);
       Router.push('/create');
-    } catch (e) {}
+    } catch {}
   };
 
   useEffect(() => {
-    if(error) {
+    if (error) {
       snackbar.showMessage(error);
     }
     clearError();
   }, [error, clearError]);
 
   const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value })
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   if (isAuthenticated) {
@@ -68,7 +69,7 @@ const LoginPage = () => {
           </Grid>
         </Grid>
       </Container>
-    )
+    );
   }
 
   return (
@@ -115,7 +116,7 @@ const LoginPage = () => {
                   variant="contained"
                 >
                   Sign in
-                </Button> 
+                </Button>
               </Box>
             </form>
           </Paper>
@@ -125,8 +126,6 @@ const LoginPage = () => {
   );
 };
 
-LoginPage.getInitialProps = () => {
-  return {};
-};
+LoginPage.getInitialProps = () => ({});
 
 export default LoginPage;
