@@ -4,10 +4,13 @@ import Router from 'next/router';
 import { AuthContext } from '../context/AuthContext';
 import { Redirection } from '../components/Redirection/Redirection';
 
-const LogoutPage = () => {
+const LogoutPage = (): JSX.Element => {
   const { logout } = useContext(AuthContext);
 
   useEffect(() => {
+    // TODO: Cannot invoke an object which is possibly 'undefined'
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     logout();
 
     const timeout = setTimeout(() => {
