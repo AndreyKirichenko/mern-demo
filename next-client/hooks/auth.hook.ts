@@ -2,7 +2,16 @@ import { useState, useCallback, useEffect } from 'react';
 
 const STORAGE_NAME = 'userData';
 
-export const useAuth = () => {
+interface UseAuth {
+  login: (jwtToken: string, id: string) => void;
+  logout: () => void;
+  ready: boolean;
+  // TODO: To specify token and userId better
+  token: string | null;
+  userId: string | null;
+}
+
+export const useAuth = (): UseAuth => {
   const [token, setToken] = useState(null);
   const [ready, setReady] = useState(false);
   const [userId, setUserId] = useState(null);
@@ -24,7 +33,7 @@ export const useAuth = () => {
   }, []);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(STORAGE_NAME));
+    const data = JSON.parse(localStorage.getItem(STORAGE_NAME) || '');
 
     if (data && data.token) {
       login(data.token, data.userId);
@@ -33,5 +42,11 @@ export const useAuth = () => {
     setReady(true);
   }, [login]);
 
-  return { login, logout, token, userId, ready };
+  return {
+    login,
+    logout,
+    ready,
+    token,
+    userId,
+  };
 };

@@ -1,6 +1,14 @@
 import { useState, useCallback } from 'react';
 
-export const useHttp = () => {
+interface UseHttp {
+  clearError: () => void ;
+  error: string;
+  loading: boolean;
+  // TODO: specify request
+  request: unknown;
+}
+
+export const useHttp = (): UseHttp => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,7 +21,7 @@ export const useHttp = () => {
         headers['Content-Type'] = 'application/json';
       }
 
-      const response = await fetch(url,  { method, body, headers });
+      const response = await fetch(url, { method, body, headers });
       const data = await response.json();
 
       if (!response.ok) {
@@ -32,5 +40,10 @@ export const useHttp = () => {
 
   const clearError = useCallback(() => setError(null), []);
 
-  return { error, clearError, loading, request };
-}
+  return {
+    clearError,
+    error,
+    loading,
+    request,
+  };
+};

@@ -7,7 +7,7 @@ import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { DesktopMenu } from '../DesktopMenu/DesktopMenu';
 import { useHeaderMenuList } from './useHeaderMenuList';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const classes = useStyles();
   const isUpToSm = useMediaQuery((theme) => theme.breakpoints.up('sm'));
   const list = useHeaderMenuList();

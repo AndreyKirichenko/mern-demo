@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
-interface ListItem {
+export interface ListItem {
   href: string;
   title: string;
 }
