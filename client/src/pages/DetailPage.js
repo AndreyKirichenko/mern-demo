@@ -31,7 +31,7 @@ export const DetailPage = () => {
 
   return (
     <>
-      {!loading && link && <LinkCard link={link} />}
+      {link && <LinkCard link={link} />}
     </>
   )
 };
