@@ -4,4 +4,4 @@ export type LinkItem = {
   date: Date;
   from: string;
   to: string;
-} | null;
+};

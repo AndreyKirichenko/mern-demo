@@ -12,6 +12,10 @@ const AUTHENTICATED_LIST: ListItem[] = [
     title: 'Create',
   },
   {
+    href: '/links',
+    title: 'My links',
+  },
+  {
     href: '/logout',
     title: 'Log out',
   },

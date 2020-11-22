@@ -1,6 +1,19 @@
 // eslint-disable-next-line import/no-unresolved
 import Link from 'next/Link';
 
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+
 import { LinkItem } from '../../typings/LinkItem';
 
 interface LinkListProps {
@@ -13,34 +26,43 @@ export const LinkList = ({ links }: LinkListProps): JSX.Element => {
   }
 
   return (
-    <>
-      <h2>Links</h2>
+    <Paper>
+      <Toolbar>
+        <Typography
+          component="h1"
+          variant="h5"
+        >
+          Links
+        </Typography>
+      </Toolbar>
 
-      <table>
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>Original</th>
-            <th>Shorted</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>№</TableCell>
+              <TableCell>Original</TableCell>
+              <TableCell>Shorted</TableCell>
+              <TableCell />
+            </TableRow>
+          </TableHead>
 
-        <tbody>
-          {links.map((link, index) => link && (
-            <tr key={link._id}>
-              <td>{index + 1}</td>
-              <td>{link.from}</td>
-              <td>{link.to}</td>
-              <td>
-                <Link href={`/detail/${link._id}`}>
-                  <a>Open</a>
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+          <TableBody>
+            {links.map((link, index) => link && (
+              <TableRow key={link._id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{link.from}</TableCell>
+                <TableCell>{link.to}</TableCell>
+                <TableCell>
+                  <Link href={`/details?linkId=${link._id}`}>
+                    <Button>Open</Button>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };

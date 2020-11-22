@@ -7,18 +7,15 @@ import { AuthContext } from '../context/AuthContext';
 import { LinkCard } from '../components/LinkCard/LinkCard';
 import { LinkItem } from '../typings/LinkItem';
 
-const DetailPage = (): JSX.Element => {
+const DetailPage = (): JSX.Element | null => {
   const { token } = useContext(AuthContext);
   const { request, loading } = useHttp();
-  const [link, setLink] = useState<LinkItem>(null);
+  const [link, setLink] = useState<LinkItem | null>(null);
 
   const router = useRouter();
   const { linkId } = router.query;
 
-  // TODO: specify event  type
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const getLink = useCallback(async (): Promise<unknown> => {
+  const getLink = useCallback(async (): Promise<LinkItem | undefined> => {
     try {
       // TODO: specify request
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -38,15 +35,13 @@ const DetailPage = (): JSX.Element => {
     getLink();
   }, [getLink]);
 
+  if (!link) return null;
+
   if (loading) {
     return <CircularProgress />;
   }
 
-  return (
-    <>
-      {link && <LinkCard link={link} />}
-    </>
-  );
+  return <LinkCard link={link} />;
 };
 
 export default DetailPage;
