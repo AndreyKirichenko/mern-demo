@@ -1,19 +1,16 @@
 {
-  "name": "mern-demo",
-  "version": "1.0.0",
-  "description": "MERN course",
+  "name": "mernn-demo",
+  "version": "2.0.0",
+  "description": "Bootstrap for quick start with MongoDB Express React NextJs Nodejs.",
   "main": "app.js",
   "scripts": {
     "server": "npm run server --prefix server",
     "server:install": "npm install --prefix server",
-    "client": "npm run start --prefix client",
+    "client": "npm run dev --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
-    "next-client": "npm run dev --prefix next-client",
-    "next-client:install": "npm install --prefix next-client",
-    "next-client:build": "npm run build --prefix next-client",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
-    "dev-nextjs": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run next-client\""
+    "dev-nextjs": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
