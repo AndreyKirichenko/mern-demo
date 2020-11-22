@@ -7,8 +7,8 @@ export interface UseAuth {
   login: (jwtToken: string, id: string) => void;
   logout: () => void;
   ready: boolean;
-  token: string | null;
-  userId: string | null;
+  token?: string | null;
+  userId?: string | null;
 }
 
 export const useAuth = (): UseAuth => {
@@ -33,10 +33,14 @@ export const useAuth = (): UseAuth => {
   }, []);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(STORAGE_NAME) || '');
+    const jsonData = localStorage.getItem(STORAGE_NAME);
 
-    if (data && data.token) {
-      login(data.token, data.userId);
+    if (jsonData) {
+      const data = JSON.parse(jsonData);
+
+      if (data && data.token) {
+        login(data.token, data.userId);
+      }
     }
 
     setReady(true);
