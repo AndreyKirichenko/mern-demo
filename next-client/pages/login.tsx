@@ -4,9 +4,10 @@ import { useSnackbar } from 'material-ui-snackbar-provider';
 import Router from 'next/router';
 
 import { AuthContext } from '../context/AuthContext';
-import { useHttp } from '../hooks/http.hook';
+import { useHttp } from '../hooks/http-new.hook';
 import { Redirection } from '../components/Redirection/Redirection';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
+import { Auth } from '../typings/Auth';
 
 const LoginPage = (): JSX.Element => {
   const snackbar = useSnackbar();
@@ -16,28 +17,21 @@ const LoginPage = (): JSX.Element => {
     password: '',
   });
 
-  const { error, loading, request, clearError } = useHttp();
+  const { error, loading, request, clearError } = useHttp<Auth>();
 
   const { login, isAuthenticated } = useContext(AuthContext);
 
-  // TODO: specify Promise
-  const loginHandler = async (): Promise<unknown> => {
-    try {
-      // TODO: specify request
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const data = await request('/api/auth/login', 'POST', { ...form });
+  const loginHandler = async (): Promise<void> => {
+    const data = await request({
+      url: '/api/auth/login',
+      method: 'POST',
+      body: { ...form },
+    });
 
-      // TODO: Cannot invoke an object which is possibly 'undefined'
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    if (data && data.token && data.userId) {
       login(data.token, data.userId);
-
       Router.push('/create');
-
-      return data;
-    // eslint-disable-next-line no-empty
-    } catch {}
+    }
   };
 
   useEffect(() => {
