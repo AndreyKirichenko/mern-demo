@@ -1,0 +1,6 @@
+{
+  "jwtSecret": "Hello world!",
+  "mongoUri": "mongodb+srv://name:<password>@cluster0-rnft1.azure.mongodb.net/app?retryWrites=true&w=majority",
+  "port": 5000,
+  "baseUrl": "http://localhost:5000"
+}
