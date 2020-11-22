@@ -31,7 +31,7 @@ const RegisterPage = (): JSX.Element => {
       snackbar.showMessage(data.message);
 
       setTimeout(() => {
-        Router.push('/');
+        Router.push('/login');
       }, 5000);
 
       return data;
