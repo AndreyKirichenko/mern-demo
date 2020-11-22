@@ -26,7 +26,7 @@ export const LinksList = ({ links }: LinkListProps): JSX.Element => {
         </thead>
 
         <tbody>
-          {links.map((link, index) => (
+          {links.map((link, index) => link && (
             <tr key={link._id}>
               <td>{index + 1}</td>
               <td>{link.from}</td>
