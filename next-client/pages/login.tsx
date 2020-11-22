@@ -2,9 +2,10 @@ import { useEffect, useContext, useState, ChangeEvent } from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 import { useSnackbar } from 'material-ui-snackbar-provider';
 import Router from 'next/router';
+import Head from 'next/head';
 
 import { AuthContext } from '../context/AuthContext';
-import { useHttp } from '../hooks/http-new.hook';
+import { useHttp } from '../hooks/http.hook';
 import { Redirection } from '../components/Redirection/Redirection';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
 import { Auth } from '../typings/Auth';
@@ -28,11 +29,22 @@ const LoginPage = (): JSX.Element => {
       body: { ...form },
     });
 
-    if (data && data.token && data.userId) {
+    if (login && data && data.token && data.userId) {
       login(data.token, data.userId);
       Router.push('/create');
     }
   };
+
+  useEffect(
+    () => {
+      const timeout = setTimeout(() => {
+        if (isAuthenticated) Router.push('/');
+      }, 5000);
+
+      return () => clearInterval(timeout);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (error) {
@@ -46,13 +58,15 @@ const LoginPage = (): JSX.Element => {
   };
 
   if (isAuthenticated) {
-    setTimeout(() => Router.push('/'), 5000);
-
     return <Redirection title="You are already authenticated" />;
   }
 
   return (
     <CentralBillet title="Log In">
+      <Head>
+        <title>Log in</title>
+      </Head>
+
       <form>
         <Box mb={4}>
           <TextField

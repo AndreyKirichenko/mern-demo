@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Container, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Head from 'next/head';
 
 import { AuthContext } from '../../context/AuthContext';
 import { Header } from '../Header/Header';
@@ -31,10 +30,6 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
   return (
     <AuthContext.Provider value={auth}>
-      <Head>
-        <title>My page title</title>
-      </Head>
-
       <Header />
 
       <main className={classes.main}>

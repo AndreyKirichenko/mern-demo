@@ -24,7 +24,7 @@ export const Header = (): JSX.Element => {
       <Toolbar>
         <Link href="/">
           <Typography variant="h6" className={classes.title}>
-            News
+            Quick start
           </Typography>
         </Link>
 

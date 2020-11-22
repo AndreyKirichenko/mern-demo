@@ -1,34 +1,34 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
+import Router from 'next/router';
+
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
-
 import { LinkList } from '../components/LinkList/LinkList';
 
 const LinksPage = (): JSX.Element => {
   const [links, setLinks] = useState([]);
-  const { loading, request } = useHttp();
+  const { loading, request } = useHttp<[]>();
 
-  const { token } = useContext(AuthContext);
+  const { isAuthenticated, token } = useContext(AuthContext);
 
   const fetchLinks = useCallback(async () => {
-    try {
-      // TODO: specify request
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const fetched = await request('/api/link/', 'GET', null, {
+    const fetched = await request({
+      url: '/api/link/',
+      method: 'GET',
+      headers: {
         Authorization: `Bearer ${token}`,
-      });
+      },
+    });
 
-      setLinks(fetched);
-
-      // eslint-disable-next-line no-empty
-    } catch {}
+    setLinks(fetched);
   }, [token, request]);
 
   useEffect(() => {
     fetchLinks();
   }, [fetchLinks]);
+
+  if (!isAuthenticated) Router.push('/');
 
   if (loading) {
     return <CircularProgress />;

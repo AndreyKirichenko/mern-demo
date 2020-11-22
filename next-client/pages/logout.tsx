@@ -8,10 +8,7 @@ const LogoutPage = (): JSX.Element => {
   const { logout } = useContext(AuthContext);
 
   useEffect(() => {
-    // TODO: Cannot invoke an object which is possibly 'undefined'
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    logout();
+    if (logout) logout();
 
     const timeout = setTimeout(() => {
       Router.push('/');

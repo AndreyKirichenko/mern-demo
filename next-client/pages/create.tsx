@@ -5,38 +5,35 @@ import Router from 'next/router';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
+import { LinkItem } from '../typings/LinkItem';
+
+type CreateLink = {
+  link: LinkItem;
+}
 
 const CreatePage = (): JSX.Element => {
-  const auth = useContext(AuthContext);
-  const { request } = useHttp();
+  const { isAuthenticated, token } = useContext(AuthContext);
+  const { request } = useHttp<CreateLink>();
   const [link, setLink] = useState('');
 
-  // TODO: specify Promise type
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const createLink = async (): Promise<unknown> => {
-    try {
-      // TODO: specify request
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const data = await request('/api/link/generate', 'POST', { from: link }, {
-        Authorization: `Bearer ${auth.token}`,
-      });
+  const createLink = async (): Promise<void> => {
+    const data = await request({
+      url: '/api/link/generate',
+      method: 'POST',
+      body: { from: link },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      Router.push(`/details?linkId=${data.link._id}`);
-
-      return data;
-    // eslint-disable-next-line no-empty
-    } catch {}
+    if (data && data.link) Router.push(`/details?linkId=${data.link._id}`);
   };
 
-  // TODO: specify event type
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const submitHandler = (event): void => {
-    event.preventDefault();
+  const submitHandler = (): void => {
     createLink();
   };
+
+  if (!isAuthenticated) Router.push('/');
 
   return (
     <CentralBillet title="Add link">

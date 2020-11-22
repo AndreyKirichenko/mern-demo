@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, ChangeEvent } from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 import Router from 'next/router';
 import { useSnackbar } from 'material-ui-snackbar-provider';
+import Head from 'next/head';
 
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
@@ -20,23 +21,18 @@ const RegisterPage = (): JSX.Element => {
 
   const { isAuthenticated } = useContext(AuthContext);
 
-  // TODO: specify Promise
-  const registerHandler = async (): Promise<unknown> => {
-    try {
-      // TODO: specify request
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const data = await request('/api/auth/register', 'POST', { ...form });
+  const registerHandler = async (): Promise<void> => {
+    const data = await request({
+      url: '/api/auth/register',
+      method: 'POST',
+      body: { ...form },
+    });
 
-      snackbar.showMessage(data.message);
+    if (data && data.message) snackbar.showMessage(data.message);
 
-      setTimeout(() => {
-        Router.push('/login');
-      }, 5000);
-
-      return data;
-    // eslint-disable-next-line no-empty
-    } catch {}
+    setTimeout(() => {
+      Router.push('/login');
+    }, 5000);
   };
 
   useEffect(() => {
@@ -58,6 +54,8 @@ const RegisterPage = (): JSX.Element => {
 
   return (
     <CentralBillet title="Registration">
+      <Head>Registration</Head>
+
       <form>
         <Box mb={4}>
           <TextField
