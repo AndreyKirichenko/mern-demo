@@ -6,7 +6,7 @@ interface LinkListProps {
   links: LinkItem[];
 }
 
-export const LinksList = ({ links }: LinkListProps): JSX.Element => {
+export const LinkList = ({ links }: LinkListProps): JSX.Element => {
   if (!links.length) {
     return <p className="center">Link list is empty</p>;
   }

@@ -15,6 +15,8 @@ const DetailPage = (): JSX.Element => {
   const router = useRouter();
   const { linkId } = router.query;
 
+  console.log('router.query', router.query);
+
   // TODO: specify event  type
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

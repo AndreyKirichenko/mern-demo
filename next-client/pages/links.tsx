@@ -1,10 +1,11 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
+import { CircularProgress } from '@material-ui/core';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
-import { Loader } from '../components/Loader';
-import { LinksList } from '../components/LinksList';
 
-export const LinksPage = () => {
+import { LinkList } from '../components/LinkList/LinkList';
+
+const LinksPage = (): JSX.Element => {
   const [links, setLinks] = useState([]);
   const { loading, request } = useHttp();
 
@@ -12,20 +13,28 @@ export const LinksPage = () => {
 
   const fetchLinks = useCallback(async () => {
     try {
+      // TODO: specify request
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const fetched = await request('/api/link/', 'GET', null, {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
+
       setLinks(fetched);
-    } catch (e) {}
+
+      // eslint-disable-next-line no-empty
+    } catch {}
   }, [token, request]);
 
   useEffect(() => {
     fetchLinks();
   }, [fetchLinks]);
 
-  if(loading) {
-    return <Loader />
+  if (loading) {
+    return <CircularProgress />;
   }
 
-  return <LinksList links={links} />;
+  return <LinkList links={links} />;
 };
+
+export default LinksPage;

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Button, Box, TextField } from '@material-ui/core';
 import Router from 'next/router';
+
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 import { CentralBillet } from '../components/CentralBillet/CentralBillet';
@@ -22,7 +23,7 @@ const CreatePage = (): JSX.Element => {
         Authorization: `Bearer ${auth.token}`,
       });
 
-      setTimeout(() => Router.push(`/details/${data.link._id}`), 5000);
+      Router.push(`/details?linkId=${data.link._id}`);
 
       return data;
     // eslint-disable-next-line no-empty
@@ -32,11 +33,8 @@ const CreatePage = (): JSX.Element => {
   // TODO: specify event type
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const pressHandler = async (event): void => {
-    if (event.key === 'Enter') createLink();
-  };
-
-  const submitHandler = (): void => {
+  const submitHandler = (event): void => {
+    event.preventDefault();
     createLink();
   };
 
@@ -50,16 +48,15 @@ const CreatePage = (): JSX.Element => {
             margin="normal"
             name="link"
             onChange={(event) => setLink(event.target.value)}
-            onKeyPress={pressHandler}
             value={link}
           />
 
           <Box display="flex" justifyContent="flex-end">
             <Button
               color="primary"
+              onClick={submitHandler}
               type="submit"
               variant="contained"
-              onClick={submitHandler}
             >
               Add Link
             </Button>
