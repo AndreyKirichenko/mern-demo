@@ -29,3 +29,7 @@ yarn-error.log*
 
 # ide
 **/.idea
+
+# server configs
+server/config/default.json
+server/config/production.json
