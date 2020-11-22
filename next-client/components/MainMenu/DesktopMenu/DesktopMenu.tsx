@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 
-import NextLink from 'next/Link';
+import Link from 'next/Link';
 import { useMainMenuList } from '../useMainMenuList';
 
 export const DesktopMenu = (): JSX.Element => {
@@ -9,9 +9,9 @@ export const DesktopMenu = (): JSX.Element => {
   return (
     <div>
       {list.map((item) => (
-        <NextLink key={item.title} href={item.href}>
+        <Link key={item.title} href={item.href}>
           <Button component="a" color="inherit">{item.title}</Button>
-        </NextLink>
+        </Link>
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Typography, Toolbar, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { default as NextLink } from 'next/Link';
+import Link from 'next/Link';
 
 import { DesktopMenu, MobileMenu } from '../MainMenu/MainMenu';
 
@@ -22,11 +22,11 @@ export const Header = (): JSX.Element => {
   return (
     <AppBar>
       <Toolbar>
-        <NextLink href="/">
+        <Link href="/">
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-        </NextLink>
+        </Link>
 
         {isUpToSm && <DesktopMenu />}
 

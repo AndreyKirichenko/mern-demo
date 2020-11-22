@@ -3,7 +3,7 @@ import { Box, Button, Drawer, List, ListItem, IconButton } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import NextLink from 'next/Link';
+import Link from 'next/Link';
 
 import { useMainMenuList } from '../useMainMenuList';
 
@@ -65,9 +65,9 @@ export const MobileMenu = (): JSX.Element => {
           >
             {list.map(item => (
               <ListItem key={item.title} className={classes.listItem}>
-                <NextLink href={item.href}>
+                <Link href={item.href}>
                   <Button component="a" color="inherit">{item.title}</Button>
-                </NextLink>
+                </Link>
               </ListItem>
             ))}
           </List>
