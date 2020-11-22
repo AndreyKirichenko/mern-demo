@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 
+// eslint-disable-next-line import/no-unresolved
 import Link from 'next/Link';
 import { useMainMenuList } from '../useMainMenuList';
 

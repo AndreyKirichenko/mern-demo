@@ -3,6 +3,7 @@ import { Box, Button, Drawer, List, ListItem, IconButton } from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+// eslint-disable-next-line import/no-unresolved
 import Link from 'next/Link';
 
 import { useMainMenuList } from '../useMainMenuList';

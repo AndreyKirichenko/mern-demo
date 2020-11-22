@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import Link from 'next/Link';
 
 import { LinkItem } from '../../typings/LinkItem';
